@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// @import "./animation.scss";
+// @import "./window.scss";
+
+
+@mixin light {
+  --theme: light;
+
+  /* color */
+  --white: white;
+  --black: rgb(48, 48, 48);
+  --gray: rgb(243 244 246);
+  --primary: rgb(124 58 237);
+  --second: rgb(139 92 246);
+  --hover-color: #f3f3f3;
+  --bar-color: rgba(0, 0, 0, 0.1);
+  --theme-color: var(--gray);
+
+  /* shadow */
+  --shadow: 50px 50px 100px 10px rgb(0, 0, 0, 0.1);
+  --card-shadow: 0px 2px 4px 0px rgb(0, 0, 0, 0.05);
+
+  /* stroke */
+  --border-in-light: 1px solid rgb(222, 222, 222);
+}
+
+@mixin dark {
+  --theme: dark;
+
+  /* color */
+  --white: rgb(30, 30, 30);
+  --black: rgb(187, 187, 187);
+  --gray: rgb(21, 21, 21);
+  --primary: rgb(29, 147, 171);
+  --second: rgb(27 38 42);
+  --hover-color: #323232;
+
+  --bar-color: rgba(255, 255, 255, 0.1);
+
+  --border-in-light: 1px solid rgba(255, 255, 255, 0.192);
+
+  --theme-color: var(--gray);
+
+  div:not(.no-dark) > svg {
+    filter: invert(0.5);
+  }
+}
+
+.light {
+  @include light;
+}
+
+.dark {
+  @include dark;
+}
+
+// .mask {
+//   filter: invert(0.8);
+// }
+
+:root {
+  @include light;
+
+}
+:root{
+	box-sizing:border-box;
+}
+*,
+::before
+::after{
+	box-sizing:inherit;
+}
+
+::-webkit-scrollbar {
+  --bar-width: 5px;
+  width: var(--bar-width);
+  height: var(--bar-width);
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  background-clip: content-box;
+  border: 1px solid transparent;
+}
+
+
+
+
+pre {
+  position: relative;
+
+  &:hover .copy-code-button {
+    pointer-events: all;
+    transform: translateX(0px);
+    opacity: 0.5;
+  }
+
+  .copy-code-button {
+    position: absolute;
+    right: 10px;
+    top: 1em;
+    cursor: pointer;
+    padding: 0px 5px;
+    background-color: var(--black);
+    color: var(--white);
+    border: var(--border-in-light);
+    border-radius: 10px;
+    transform: translateX(10px);
+    pointer-events: none;
+    opacity: 0;
+    transition: all ease 0.3s;
+
+    &:after {
+      content: "copy";
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+
+input, textarea {
+  outline: none;
+  background-color: white;
+}
+// input::-moz-focus-inner
+input:focus, textarea:focus{
+  outline:0;
+}
+
+input[type="checkbox"]{
+  appearance: none; 
+  background-color: white;
+  border-width: 1px;
+  border-radius: 4px;
+}
+input[type="checkbox"]:checked{
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' width='10' viewBox='0 0 16 12'%3E%3Cpath stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M1 5.917 5.724 10.5 15 1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: .55em .55em;
+  print-color-adjust: exact;
+}
+
+html{
+  background-color: white;
+  color: black;
+}
+
+
+
+/*样式工具*/
+.ai-absolute-center{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+$linear: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(0, 0, 0), rgba(0, 0, 0, 0));
+
+.ai-divider-mask{
+  mask-image: $linear;
+}
