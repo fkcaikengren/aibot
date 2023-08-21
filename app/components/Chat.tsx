@@ -32,7 +32,6 @@ import MyAvatar from '../images/avatar.jpeg'
 import {
   copyToClipboard,
   selectOrCopy,
-  // useMobileScreen,
 } from "../utils";
 
 
@@ -42,7 +41,7 @@ import Locale from "../locales";
 
 import { IconButton } from "./Button";
 
-import { LAST_INPUT_KEY,  REQUEST_TIMEOUT_MS } from "../constant";
+import { LAST_INPUT_KEY,  MOBILE_MAX_WIDTH,  REQUEST_TIMEOUT_MS } from "../constant";
 import { prettyObject } from "../utils/format";
 
 import { classNames } from '../utils/classNames';
@@ -54,6 +53,7 @@ import { useModal } from "./Modal";
 import Image from "next/image";
 import Popover from "./Popover";
 import { toast } from "react-hot-toast";
+// import { useWindowSize } from "react-use";
 
 
 
@@ -320,7 +320,8 @@ export function Chat() {
   const { scrollRef, setAutoScroll, scrollToBottom } = useScrollToBottom();
   const [hitBottom, setHitBottom] = useState(true);
   const [actionsVisible, setActionsVisible] = useState(false)
-  // const isMobileScreen = useMobileScreen();
+  // const {width, height} = useWindowSize();
+  // const isMobileScreen = width < MOBILE_MAX_WIDTH;
   
 
   const onChatBodyScroll = (e: HTMLElement) => {
@@ -377,11 +378,12 @@ export function Chat() {
   const doSubmit = (userInput: string) => {
     if (userInput.trim() === "") return;
     setIsLoading(true);
-    chatStore.onUserInput(userInput).then(() => setIsLoading(false)).catch(handleUserInputError);
+    chatStore.onUserInput(userInput).then(() => setIsLoading(false)).catch(handleUserInputError)
+    
     localStorage.setItem(LAST_INPUT_KEY, userInput);
     setUserInput("");
     setPromptHints([]);
-    // if (!isMobileScreen) inputRef.current?.focus();
+    
     setAutoScroll(true);
   };
 
@@ -579,8 +581,6 @@ export function Chat() {
     setActionsVisible(true);
   }
 
-  const autoFocus = true; //!isMobileScreen; // only focus in chat page
-
 
   return (
     <div className=' h-full relative px-4 overflow-auto bg-white' 
@@ -679,8 +679,7 @@ export function Chat() {
                       }
                       onContextMenu={(e) => onRightClick(e, message)}
                       onDoubleClickCapture={() => {
-                        // if (!isMobileScreen) return;
-                        setUserInput(message.content);
+                        return;
                       }}
                       fontSize={fontSize}
                       fontColor={isUser?'white':'var(--black)'}
@@ -750,7 +749,10 @@ export function Chat() {
           </Popover>
           
           
-          <div className='flex-1 flex items-end gap-3 border p-1 rounded-3xl shadow-sm '>
+          <div className='flex-1 flex items-end gap-3 border p-1 rounded-3xl shadow-sm' onClick={()=> {
+            console.log('聚焦--')
+            inputRef.current?.focus();
+          }}>
             <div className="flex-1 pb-[10px] pl-3 pt-[8px] flex items-center">
               <textarea
                 ref={inputRef}
@@ -762,7 +764,7 @@ export function Chat() {
                 onFocus={() => setAutoScroll(true)}
                 onBlur={() => setAutoScroll(false)}
                 style={{height: DEFAULT_TEXTAREA_HEIGHT}}
-                autoFocus={autoFocus}
+                autoFocus={false}
               />
             </div>
             <IconButton

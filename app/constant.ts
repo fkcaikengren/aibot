@@ -27,3 +27,8 @@ export const EXPORT_MESSAGE_CLASS_NAME = "export-markdown";
 // 表单
 export const EMAIL_REGEX = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/
 export const PASSWORD_REGEX = /.{6,}/ 
+
+
+
+// UI
+export const MOBILE_MAX_WIDTH = 640;

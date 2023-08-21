@@ -55,7 +55,7 @@ const Modal: FC<PropsWithChildren<{}>> = ({children})=> {
       setTimeout(()=>{
         //修改dom
         const ref = modalRefs.current[modalRefs.current.length-1]
-        if(ref && options.transitionEndStyle ){
+        if(ref && options?.transitionEndStyle ){
           Object.keys(options.transitionEndStyle).forEach((key:any)=>{
             ref.style[key] = options.transitionEndStyle?.[key as keyof CSSProperties] as string ||'';
           })
@@ -97,6 +97,7 @@ const Modal: FC<PropsWithChildren<{}>> = ({children})=> {
       {hasDom &&
         actives.map((active, i) => {
           const modal = modals[i];
+          if(!modal) return null;
           return createPortal(
             <div className='absolute top-0 left-0 z-50 w-screen h-screen' >
               <div  

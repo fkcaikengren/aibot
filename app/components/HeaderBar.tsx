@@ -17,7 +17,7 @@ const HeaderBar = () => {
     openModal(
       <SideBar close={closeModal} /> ,
       {
-        containerClass: 'h-full w-80 overflow-y-auto bg-white duration-300 ease-in-out transition-transform -translate-x-full',
+        containerClass: 'h-full w-64 overflow-y-auto bg-white duration-300 ease-in-out transition-transform -translate-x-full',
         transitionEndStyle:{
           transform: 'translateX(0)'
         },
@@ -27,7 +27,7 @@ const HeaderBar = () => {
   }
   return <>
    
-      <header className='w-full h-12 sm:h-14 border-b flex justify-center items-center relative'>
+      <header className='w-full h-[50px] sm:h-14 border-b flex justify-center items-center relative'>
         <button className='sm:hidden w-10 h-10 absolute top-1/2 left-3 -translate-y-1/2'
           onClick={handleClickExpand}>
         <BarsIcon className='w-8 h-8' />

@@ -185,7 +185,6 @@ class LLM{
           options.onError?.(new Error("请求错误，请稍后重试"));
         },
         onmessage(msg) {
-          
           if(msg.event === "error" || msg.event === 'FatalError'){ // event-stream出错
             options.onError?.(new Error(msg.data));
             return 
@@ -210,6 +209,7 @@ class LLM{
           finish();
         },
         onerror(e) {
+          // TODO: [Bug] 404会一直retry（不断重试请求），未解决
           // event-stream请求错误
           options.onError?.(e);
         },

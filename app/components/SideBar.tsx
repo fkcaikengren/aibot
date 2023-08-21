@@ -112,10 +112,10 @@ const SideBar = ({close}:{close?:()=>void}) => {
   } 
   return <>
    
-      <header className='h-12 sm:h-14 py-1 border-b flex items-center'>
+      <header className='h-[50px] sm:h-14 py-1 border-b flex items-center'>
         <a className='flex items-center px-4 w-full cursor-pointer' onClick={(e)=> handleMenuClick(e, '0')}>
           <Image
-            className='rounded-xl'
+            className='rounded-xl w-8 sm:w-9'
             src={Logo}
             alt='logo'
             width={36}
