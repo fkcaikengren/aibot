@@ -23,7 +23,7 @@ export default function NavigationEvents({
 
 
   if( inWhiteList){
-    return <>children</>
+    return <>{children}</>
   }
 
   return <>

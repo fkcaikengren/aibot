@@ -46,20 +46,20 @@ export default function Home({data}: {data:any}) {
       <div>
         <Card className="bg-white flex">
           <Image
-            className="rounded-full border border-violet-300 "
+            className="rounded-full border border-violet-300 w-[68px] sm:w-[80px]"
             src={avatar || MyAvatar}
             alt="avatar"
             width={80}
             height={80}
           />
-          <div className="pl-5 flex flex-col items-start justify-around">
+          <div className="pl-4 sm:pl-5 flex flex-col items-start justify-around">
             <div className="flex">
-              <div className="text-3xl text-violet-500">
+              <div className="text-2xl sm:text-3xl text-violet-500">
                 {nickname}
               </div>
             </div>
-            <div className="flex">
-              <div className="bg-violet-300 rounded-sm text-white px-1 mr-2 flex-shrink-0">
+            <div className="flex leading-tight sm:leading-normal">
+              <div className="bg-violet-300 rounded-md text-white px-[2px] sm:px-[4px] mr-2 flex-shrink-0">
                 邮箱
               </div>
               <p className=" text-gray-600">{email}</p>

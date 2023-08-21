@@ -26,7 +26,7 @@ export default function EditPromptModal({
     <div className="px-6 py-5 border-dotted border-b-2">
       <h4 className="text-lg text-bold">{prompt.isUser?'编辑提示词':'查看提示词'}</h4>
     </div>
-    <div className="overflow-y-auto px-6 py-6 w-[370px] sm:w-[500px]  ">
+    <div className="overflow-y-auto px-6 py-6  ">
     <form>
       <div className="">
         <input

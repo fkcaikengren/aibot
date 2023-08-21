@@ -57,7 +57,7 @@ import { toast } from "react-hot-toast";
 
 
 
-const DEFAULT_TEXTAREA_HEIGHT = "21px"
+const DEFAULT_TEXTAREA_HEIGHT = "35px"
 
    
 
@@ -143,7 +143,7 @@ function ChatHistoryModal(props:{closeActionPopover:()=>void}) {
             </div>
           ))}
         </div>
-        <p className="text-sm mx-4 py-3 text-right">对话信息保存在本地，仅保留最近的30条对话信息</p>
+        <p className="text-sm mx-4 py-3 text-right">对话信息保存在本地，仅保留最近的30条对话</p>
       </>
 }
 
@@ -590,7 +590,6 @@ export function Chat() {
       onMouseDown={() => inputRef.current?.blur()}
       onWheel={(e) => setAutoScroll(hitBottom && e.deltaY > 0)}
       onTouchStart={() => {
-        inputRef.current?.blur();
         setAutoScroll(false);
       }}
     >
@@ -714,24 +713,24 @@ export function Chat() {
               <div className="relative m-h-[100px] w-[9rem] bg-white border rounded-lg">
                 <div className="hover:bg-gray-100 w-full"> 
                   <IconButton
-                    className="p-3 pr-7" 
-                    icon={<ClockIcon className='w-6 h-6 mr-1'/>}
+                    className="pl-3 pr-7 py-2" 
+                    icon={<ClockIcon className='w-5 h-5 mr-1'/>}
                     text='历史对话'
                     onClick={onClickChatHistory}
                   />
                 </div>
                 <div className="hover:bg-gray-100 w-full"> 
                   <IconButton
-                    className="p-3 pr-7"
-                    icon={<ChatIcon className='w-6 h-6 mr-1 pr-[1px]'/>}
+                    className="pl-3 pr-7 py-2"
+                    icon={<ChatIcon className='w-5 h-5 mr-1 '/>}
                     text='新建对话'
                     onClick={onNewSession}
                   />  
                 </div>
                 <div className="hover:bg-gray-100 w-full"> 
                   <IconButton
-                    className="p-3 pr-4"
-                    icon={<ClearIcon className='w-6 h-6 mr-1'/>}
+                    className="pl-3 pr-4 py-2"
+                    icon={<ClearIcon className='w-5 h-5 mr-1'/>}
                     text='清除上下文'
                     onClick={onClearContext}
                   />
@@ -749,21 +748,18 @@ export function Chat() {
           </Popover>
           
           
-          <div className='flex-1 flex items-end gap-3 border p-1 rounded-3xl shadow-sm' onClick={()=> {
-            console.log('聚焦--')
-            inputRef.current?.focus();
-          }}>
-            <div className="flex-1 pb-[10px] pl-3 pt-[8px] flex items-center">
+          <div className='flex-1 flex items-end gap-3 border p-1 rounded-3xl shadow-sm' >
+            <div className="flex-1 pl-3 flex items-center">
               <textarea
                 ref={inputRef}
-                className={"w-full overflow-x-hidden resize-none text-sm leading-normal max-h-28 bg-transparent"}
+                className={"w-full overflow-x-hidden resize-none text-sm leading-normal max-h-[160px] bg-transparent py-1"}
                 placeholder={`${submitKey} 发送，/ 触发提示词`}
                 onInput={(e) => onInput(e.currentTarget.value)}
                 value={userInput}
                 onKeyDown={onInputKeyDown}
                 onFocus={() => setAutoScroll(true)}
                 onBlur={() => setAutoScroll(false)}
-                style={{height: DEFAULT_TEXTAREA_HEIGHT}}
+                style={{height: DEFAULT_TEXTAREA_HEIGHT }} 
                 autoFocus={false}
               />
             </div>

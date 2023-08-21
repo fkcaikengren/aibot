@@ -7,7 +7,7 @@ export function trimTopic(topic: string) {
   return topic.replace(/[，。！？”“"、,.!?]*$/, "");
 }
 
-const Copy = { Success: "已写入剪切板", Failed: "复制失败，请赋予剪切板权限" };
+const Copy = { Success: "已写入剪切板", Failed: "复制失败，请手动复制" };
 
 export async function copyToClipboard(text: string) {
   try {

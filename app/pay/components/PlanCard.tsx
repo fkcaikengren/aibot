@@ -6,6 +6,7 @@ import CheckIcon from '../../icons/check.svg'
 import { useModal } from "@/app/components/Modal";
 import { useAccessStore } from "@/app/store";
 import { toast } from "react-hot-toast";
+import { copyToClipboard } from "@/app/utils";
 
 
 function PayModal({plan}: {plan:Plan}){
@@ -33,10 +34,9 @@ function PayModal({plan}: {plan:Plan}){
     </div>
     <div className="px-6 py-5 border-dotted border-t-2 flex justify-center items-center">
       <button className="px-4 py-1 rounded-lg bg-violet-500 text-white hover:bg-violet-600" onClick={()=>{
-        navigator.clipboard.writeText(copyContent).then(_=>{
+        copyToClipboard(copyContent).then(_=>{
           closeModal()
-          toast.success('复制成功')
-        }).catch(_=>toast.error('复制失败，请求手动复制'))
+        }).catch(_=>null)
       }}>
       确认复制购买信息
       </button>

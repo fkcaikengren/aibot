@@ -84,7 +84,7 @@ export default function UserPrompt(props: { onClose?: () => void }) {
   const actionBtnClass = 'hover:bg-gray-200 p-2 rounded-lg'
 
   const modalOptions = useMemo(()=> 
-    ({containerClass:"flex flex-col justify-between ai-absolute-center rounded-2xl bg-white "}),
+    ({containerClass:"flex flex-col justify-between ai-absolute-center rounded-2xl bg-white w-[calc(100%-32px)] sm:w-[520px]"}),
   [])
 
   return (
