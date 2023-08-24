@@ -61,12 +61,11 @@
 //   filter: invert(0.8);
 // }
 
-:root {
+html{
   @include light;
-
-}
-:root{
-	box-sizing:border-box;
+  box-sizing:border-box;
+  color: var(--black);
+  background-color: white;
 }
 *,
 ::before
@@ -152,10 +151,7 @@ input[type="checkbox"]:checked{
   print-color-adjust: exact;
 }
 
-html{
-  background-color: white;
-  color: black;
-}
+
 
 
 

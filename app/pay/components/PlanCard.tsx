@@ -11,11 +11,12 @@ import { copyToClipboard } from "@/app/utils";
 
 function PayModal({plan}: {plan:Plan}){
   const {closeModal} = useModal()
-  const {email} = useAccessStore()
+  const {id, email} = useAccessStore()
   const copyContent = `套餐ID：${plan.id}
 套餐：${plan.name}
 描述：${plan.llm.name} - ${displayTokensNum(plan.tokens)} tokens
-支付：${plan.price}元
+金额：${plan.price}元
+用户ID：${id}
 邮箱: ${email}
   `
   return  <>
@@ -28,7 +29,8 @@ function PayModal({plan}: {plan:Plan}){
         <p>套餐ID：{plan.id}</p>
         <p>套餐：{plan.name}</p>
         <p>描述：{plan.llm.name} - {displayTokensNum(plan.tokens)} tokens</p>
-        <p>支付：{plan.price}元</p>
+        <p>金额：{plan.price}元</p>
+        <p>用户ID：{id.slice(0,6)}<span className='align-sub'>*****</span>{id.slice(-6)}</p>
         <p>邮箱: {email}</p>
       </div>
     </div>

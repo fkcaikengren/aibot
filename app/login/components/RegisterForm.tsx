@@ -172,6 +172,7 @@ export default function RegisterFrom() {
   const countdownInterval = useRef<any>(0);
   const { openModal } = useModal()
   const [loading, setLoading] = useState(false)
+  const [sending, setSending] = useState(false);
   const [countdown, setCountdown] = useState(0)
 
   useEffect(()=>{
@@ -184,20 +185,22 @@ export default function RegisterFrom() {
   },[])
 
   const onClickTerms = (e?: MouseEvent<HTMLAnchorElement>)=>{
-    openModal(<TermsModal /> , { containerClass:"flex flex-col justify-between ai-absolute-center rounded-2xl bg-white w-11/12 h-5/6 sm:w-3/4 sm:h-3/4 max-w-[800px]"})
+    openModal(<TermsModal /> , { containerClass:"flex flex-col justify-between ai-absolute-center rounded-2xl bg-white w-11/12 h-5/6 sm:w-3/4 sm:h-3/4 max-w-[800px] text-gray-600"})
     e?.preventDefault()
   }
 
   const onGetEmailCode = useCallback(async ()=>{
+    
     //发送验证码
     const emailAddr = getValues('email');
     if(!EMAIL_REGEX.test(emailAddr))
       return ;
-    
+    setSending(true)
     const res = await httpGet(`/email_codes/${emailAddr}`);
+    setSending(false);
     if(res.code >=400 || res.code <200 )
       return
-
+    
     setCountdown(90);
     let startCountdown = true;
     
@@ -265,13 +268,13 @@ export default function RegisterFrom() {
             {item.fieldName==='emailCode' &&
               <button type="button"
                 className={classNames("absolute right-0 top-0 inline-block w-28 pr-4 py-2  rounded-r-full border border-transparent hover:border-gray-200",{
-                  'text-gray-400':(countdown>0),
-                  'cursor-wait':(countdown>0)
+                  'text-gray-400':(sending || countdown>0),
+                  'cursor-wait':(sending || countdown>0)
                 })}
-                disabled={countdown>0}
+                disabled={sending || countdown>0}
                 onClick={onGetEmailCode}
               >
-                {countdown>0?`${countdown}s`:'获取验证码'}
+                {sending ? '发送中...' :(countdown>0?`${countdown}s`:'获取验证码')}
               </button>
             }
           </div>
