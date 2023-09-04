@@ -17,7 +17,7 @@ function PayModal({plan}: {plan:Plan}){
 描述：${plan.llm.name} - ${displayTokensNum(plan.tokens)} tokens
 金额：${plan.price}元
 用户ID：${id}
-邮箱: ${email}
+邮箱：${email}
   `
   return  <>
     <div className="px-6 py-5 border-dotted border-b-2">
@@ -31,7 +31,7 @@ function PayModal({plan}: {plan:Plan}){
         <p>描述：{plan.llm.name} - {displayTokensNum(plan.tokens)} tokens</p>
         <p>金额：{plan.price}元</p>
         <p>用户ID：{id.slice(0,6)}<span className='align-sub'>*****</span>{id.slice(-6)}</p>
-        <p>邮箱: {email}</p>
+        <p>邮箱：{email}</p>
       </div>
     </div>
     <div className="px-6 py-5 border-dotted border-t-2 flex justify-center items-center">

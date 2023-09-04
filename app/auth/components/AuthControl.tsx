@@ -1,6 +1,6 @@
 "use client"
 
-import {  httpGet, removeCookieToken, saveCookieToken } from "@/app/http/client";
+import {  httpGet, loadCookieToken, removeCookieToken, saveCookieToken } from "@/app/http/client";
 import { useAccessStore } from "@/app/store";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
@@ -16,9 +16,24 @@ export default function AuthControl() {
   const router  = useRouter()
   const searchParams = useSearchParams()
 
+
+  const logout = ()=>{
+     //退出登录
+     useAccessStore.getState().reset();
+     removeCookieToken();
+     router.push('/login')
+  }
+
   useEffect(()=>{
     
     (async ()=>{
+
+      const token = loadCookieToken();
+      if(!token){
+        logout();
+        return;
+      }
+
       const res = await httpGet('/verify_token'); 
       if(res.code >= 200 && res.code<400){ //成功
         
@@ -32,10 +47,7 @@ export default function AuthControl() {
           router.push('/')
         router.refresh(); //!important. 跳转路由时“刷新”，触发server component request（不会刷新浏览器）
       }else{
-        //退出登录
-        useAccessStore.getState().reset();
-        removeCookieToken();
-        router.push('/login')
+        logout();
       }
       
     })();

@@ -17,7 +17,7 @@ export function removeCookieToken(){
 }
 
 export function loadCookieToken(){
-  clientCookie.load('token');
+  return clientCookie.load('token');
 }
 
 const DEFAULT_HEADERS = {
