@@ -16,6 +16,8 @@ export interface AccessControlStore {
   avatar: string,
   email: string,
   phone: string,
+  role: string,
+  new: boolean,
   
   updateToken: (_: string) => void;
   init :(_:object) => void;
@@ -31,6 +33,8 @@ const DEFAULT_ACCESS_STORE = {
   avatar: "",
   email: "",
   phone: "",
+  role: "",
+  new: false
 }
 
 export const useAccessStore = create<AccessControlStore>()(

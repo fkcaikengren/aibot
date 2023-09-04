@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import pick from 'lodash/pick'
-import * as clientCookie from 'react-cookies'
 import { useRouter } from 'next/navigation';
 import { httpPost, saveCookieToken } from '@/app/http/client';
 import { classNames } from '@/app/utils/classNames';
@@ -58,7 +57,7 @@ export default function LoginForm(){
       if(res.code >= 200 && res.code < 400  && res.data){
         res.data.token = res.data.accessToken
         // 保存用户信息
-        accessStore.init(pick(res.data, ['token', 'refreshToken','id', 'nickname', 'avatar', 'email', 'phone']))
+        accessStore.init(pick(res.data, ['token', 'refreshToken','id', 'nickname', 'avatar', 'email', 'phone', 'role', 'new']))
         // 保存到cookie
         saveCookieToken(res.data.token)
         

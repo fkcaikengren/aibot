@@ -142,7 +142,7 @@ export const usePromptStore = create<PromptStore>()(
       search(text) {
         if (text.length === 0) {
           // return all rompts
-          get().getAllPrompts();
+          return get().getAllPrompts();
         }
         return SearchService.search(text) as Prompt[];
       },

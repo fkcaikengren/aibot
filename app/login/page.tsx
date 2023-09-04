@@ -15,10 +15,13 @@ export default async function LoginPage() {
           <div className="pt-6">
             <LoginForm />
             <div className='flex flex-row-reverse items-center mt-6'>
-              <Link className='cursor-pointer text-violet-500  hover:text-violet-600 pr-3'
-                href={'/login/register'}>
-              立即注册
-              </Link>
+              <div>
+                <span className='mr-1'>未创建账号 👉</span>
+                <Link className='cursor-pointer text-violet-500  hover:text-violet-600 pr-3'
+                  href={'/login/register'}>
+                立即注册
+                </Link>
+              </div>
             </div>
           </div>
         </main>

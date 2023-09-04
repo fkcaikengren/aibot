@@ -10,6 +10,7 @@ export interface BasePlan {
   originalPrice:number; //原价
   price: number; //售价
   period: number; //有效天数
+  onlyNew: boolean; //仅限新用户
   // llm: LLM;
 }
 

@@ -7,6 +7,7 @@ import { useModal } from "@/app/components/Modal";
 import { useAccessStore } from "@/app/store";
 import { toast } from "react-hot-toast";
 import { copyToClipboard } from "@/app/utils";
+import { useEffect, useState } from "react";
 
 
 function PayModal({plan}: {plan:Plan}){
@@ -49,6 +50,13 @@ function PayModal({plan}: {plan:Plan}){
 export default function PlanCard({plan}: {plan:Plan}){
 
   const {openModal} = useModal()
+  const accessStore = useAccessStore();
+  const [userNew, setUserNew] = useState(false)
+
+  useEffect(()=>{
+    setUserNew(accessStore.new)
+  }, [])
+
   return <Card 
     className='bg-white flex flex-col items-center duration-300 ease-in-out hover:shadow-xl hover:-translate-y-px'
     onClick={(e)=>{
@@ -68,6 +76,12 @@ export default function PlanCard({plan}: {plan:Plan}){
         <span className="text-gray-600">{desc}</span>
       </li>
     ))}
+    {plan.onlyNew && userNew &&
+      <li key={'onlyNew'} className='flex justify-start items-center pb-1'>
+        <CheckIcon className='w-5 h-5 text-green-600 mr-2'></CheckIcon>
+        <span className="text-gray-600">仅限新用户</span>
+      </li>
+    }
   </ul>
   {/* Price */}
   <div className="mt-2 mb-4">

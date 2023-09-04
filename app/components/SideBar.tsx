@@ -48,7 +48,7 @@ export const MENUS:MenuInfo[] = [
   {
     id: '2',
     name: 'GPT4',
-    info:'limited',  
+    info:'',  
     img: <BlackBotIcon className='w-9 h-9'/>, 
     path: '/gpt-4',
     border: true,

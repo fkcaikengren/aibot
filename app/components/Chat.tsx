@@ -136,14 +136,14 @@ function ChatHistoryModal(props:{closeActionPopover:()=>void}) {
 
               <div className='flex items-center justify-between text-sm text-gray-500' >
                   <div>
-                  {ssn.mask.modelConfig.model} / {ssn.messages.length}条对话
+                  {ssn.mask.modelConfig.model} / {ssn.messages.length}条聊天记录
                   </div>
                   
               </div>
             </div>
           ))}
         </div>
-        <p className="text-sm mx-4 py-3 text-right">对话信息保存在本地，仅保留最近的30条对话</p>
+        <p className="text-sm mx-4 py-3 text-right">对话信息保存在本地，仅保留最近的30次对话</p>
       </>
 }
 
@@ -362,6 +362,7 @@ export function Chat() {
     if (n === 0) {
       setPromptHints([]);
     } else if (!config.disablePromptHint && n < SEARCH_TEXT_LIMIT) {
+      console.log('search ...')
       // check if need to trigger auto completion
       if (text.startsWith("/")) {
         let searchText = text.slice(1);
