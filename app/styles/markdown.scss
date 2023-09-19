@@ -96,8 +96,8 @@
   margin: 0;
   color: var(--color-fg-default);
   background-color: var(--color-canvas-default);
-  font-size: 0.875rem;
-  line-height: 1.5;
+  // font-size: 0.875rem;
+  // line-height: 1.5;
   word-wrap: break-word;
 }
 
@@ -682,9 +682,9 @@
   border-top: 1px solid var(--color-border-muted);
 }
 
-.markdown-body table tr:nth-child(2n) {
-  background-color: var(--color-canvas-subtle);
-}
+// .markdown-body table tr:nth-child(2n) {
+//   background-color: var(--color-canvas-subtle);
+// }
 
 .markdown-body table img {
   background-color: transparent;

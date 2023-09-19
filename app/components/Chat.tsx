@@ -53,7 +53,6 @@ import { useModal } from "./Modal";
 import Image from "next/image";
 import Popover from "./Popover";
 import { toast } from "react-hot-toast";
-// import { useWindowSize } from "react-use";
 
 
 
@@ -311,7 +310,7 @@ export function Chat() {
     state.deleteSession,
   ]);
   const config = useAppConfig();
-  const fontSize = config.fontSize;
+  // const fontSize = config.fontSize; //TODO: 移除
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [userInput, setUserInput] = useState("");
@@ -633,7 +632,7 @@ export function Chat() {
                     </div>
                   )}
                   <div className={classNames(
-                    'relative border-box max-w-full mt-3 rounded-xl p-3 text-sm  bg-gray-100 break-words',
+                    'relative text-sm lg:text-base leading-normal border-box max-w-full mt-3 rounded-xl p-3 bg-gray-100 break-words',
                     {'bg-violet-500': isUser}
                   )}>
                     {showActions && (
@@ -681,7 +680,7 @@ export function Chat() {
                       onDoubleClickCapture={() => {
                         return;
                       }}
-                      fontSize={fontSize}
+                      // fontSize={fontSize}
                       fontColor={isUser?'white':'var(--black)'}
                       parentRef={scrollRef}
                       defaultShow={i >= messages.length - 10}

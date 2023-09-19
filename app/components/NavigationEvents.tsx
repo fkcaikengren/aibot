@@ -5,7 +5,7 @@ import SideBar from "./SideBar";
 import HeaderBar from "./HeaderBar";
 
 
-const whiteList = ['/login', '/auth']; 
+const whiteList = ['/login', '/auth', '/apps/']; 
 
 export default function NavigationEvents({
   children,

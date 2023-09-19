@@ -4,7 +4,7 @@ import {
   fetchEventSource,
 } from "@fortaine/fetch-event-source";
 import { REQUEST_TIMEOUT_MS } from "@/app/constant";
-import { useAccessStore, useAppConfig, useChatStore } from "../store";
+import { ALL_MODELS, useAccessStore, useAppConfig, useChatStore } from "../store";
 
 
 export const ROLES = ["system", "user", "assistant"] as const; 
@@ -25,16 +25,20 @@ export interface LLMConfig {
   frequency_penalty?: number;
 }
 
-//
-export interface ChatOptions {
-  messages: RequestMessage[];
-  config: LLMConfig;
-
+export interface BaseChatOptions {
   onUpdate?: (message: string, chunk: string) => void;
   onFinish: (message: string) => void;
   onError?: (err: Error) => void;
   onController?: (controller: AbortController) => void;
 }
+
+
+export interface ChatOptions extends BaseChatOptions {
+  messages: RequestMessage[];
+  config: LLMConfig;
+
+}
+
 
 
 
@@ -80,11 +84,98 @@ export const ChatControllerPool = {
 };
 
 
+const chatWithFetchEventSource = (
+  chatPath: string,
+  chatPayload: {
+    method: string;
+    body: string;
+    signal?: AbortSignal;
+    headers: any;
+  },
+  options: BaseChatOptions,
+  requestTimeoutId: ReturnType<typeof setTimeout>|undefined = undefined,
+): Promise<((this: AbortSignal, ev: Event) => any) | null> => {
+  return new Promise((resolve, reject) => {
+    let responseText = "";
+    let finished = false;
+
+    const finish = () => {
+      if (!finished) {
+        options.onFinish(responseText);
+        finished = true;
+      }
+    };
+
+    // PS：如果在onopen等钩子中throw new Error()，会导致重新请求（不断retry)
+    fetchEventSource(chatPath, {
+      ...chatPayload,
+      async onopen(res) {
+        if(requestTimeoutId){
+          clearTimeout(requestTimeoutId);
+        }
+        const contentType = res.headers.get("content-type");
+        if (res.ok && contentType === EventStreamContentType) {
+          resolve(finish);
+          return; // everything's good
+        } else if (
+          contentType?.startsWith("application/json") &&
+          res.status >= 400
+        ) {
+          try {
+            const resJson = await res.clone().json();
+            reject(resJson);
+            options.onError?.(new Error(resJson.errMsg));
+          } catch {
+            resolve(finish);
+            options.onError?.(new Error("请求错误，请稍后重试"));
+          }
+          return;
+        }
+        resolve(finish);
+        options.onError?.(new Error("请求错误，请稍后重试"));
+      },
+      onmessage(msg) {
+        if (msg.event === "error" || msg.event === "FatalError") {
+          // event-stream出错
+          options.onError?.(new Error(msg.data));
+          return;
+        }
+        if (finished) {
+          // 结束
+          return finish();
+        }
+        if (msg.data === "") return;
+        try {
+          const parsed = JSON.parse(msg.data);
+          const delta = parsed.data;
+          if (delta) {
+            responseText += delta;
+            options.onUpdate?.(responseText, delta);
+          }
+        } catch (e) {
+          console.log("[Parsed] failed to parse data", e);
+        }
+      },
+      onclose() {
+        finish();
+      },
+      onerror(e) {
+        // TODO: [Bug] 404会一直retry（不断重试请求），未解决
+        // event-stream请求错误
+        options.onError?.(e);
+      },
+      openWhenHidden: true,
+    });
+  });
+};
+
+
 
 
 /** 聊天 */
 class LLM{
-  async  chat(options: ChatOptions) : Promise<void>{
+  // 通用聊天
+  async chat(options: ChatOptions) : Promise<void>{
 
     const {token} = useAccessStore.getState()
     // const token = ''
@@ -130,95 +221,69 @@ class LLM{
       },
     };
 
-   // make a fetch request
-   const requestTimeoutId = setTimeout(
-    () => controller.abort(),
-    REQUEST_TIMEOUT_MS,
-  );
+    // make a fetch request
+    const requestTimeoutId = setTimeout(
+      () => controller.abort(),
+      REQUEST_TIMEOUT_MS,
+    );
 
-  if(!shouldStream){
-    return fetch(chatPath, chatPayload)
-      .then(response=>response.json())
-      .then(res=>{
-        clearTimeout(requestTimeoutId);
-        const message =  res.data || "";
-        options.onFinish(message);
-        return;
-      });
-  }
-  
-    return new Promise((resolve, reject) =>{
-      let responseText = "";
-      let finished = false;
-
-      const finish = () => {
-        if (!finished) {
-          options.onFinish(responseText);
-          finished = true;
-        }
-      };
-
-      controller.signal.onabort = finish;
-
-      // PS：如果在onopen等钩子中throw new Error()，会导致重新请求（不断retry)
-      fetchEventSource(chatPath, {
-        ...chatPayload,
-        async onopen(res) {
+    if(!shouldStream){
+      return fetch(chatPath, chatPayload)
+        .then(response=>response.json())
+        .then(res=>{
           clearTimeout(requestTimeoutId);
-          const contentType = res.headers.get("content-type");
-          if (res.ok && contentType === EventStreamContentType) {
-            resolve();
-            return; // everything's good
-          } else if (contentType?.startsWith('application/json') && res.status >= 400) {
-            try {
-              const resJson = await res.clone().json();
-              reject(resJson);
-              options.onError?.(new Error(resJson.errMsg));
-            } catch {
-              resolve();
-              options.onError?.(new Error("请求错误，请稍后重试"));
-               
-            }
-            return;
-          } 
-          resolve();
-          options.onError?.(new Error("请求错误，请稍后重试"));
-        },
-        onmessage(msg) {
-          if(msg.event === "error" || msg.event === 'FatalError'){ // event-stream出错
-            options.onError?.(new Error(msg.data));
-            return 
-          }
-          if ( finished) { // 结束
-            return finish();
-          }
-          if(msg.data === '')
-            return;
-          try {
-            const parsed = JSON.parse(msg.data)
-            const delta = parsed.data;
-            if(delta){
-              responseText += delta;
-              options.onUpdate?.(responseText, delta);
-            }
-          } catch (e) {
-            console.log("[Parsed] failed to parse data", e);
-          }
-        },
-        onclose() {
-          finish();
-        },
-        onerror(e) {
-          // TODO: [Bug] 404会一直retry（不断重试请求），未解决
-          // event-stream请求错误
-          options.onError?.(e);
-        },
-        openWhenHidden: true,
-        
-      })
-     
-    });
+          const message =  res.data || "";
+          options.onFinish(message);
+          return;
+        });
+    }
     
+    
+
+    const finish = await chatWithFetchEventSource(chatPath, chatPayload, {
+        onUpdate: options?.onUpdate,
+        onFinish: options?.onFinish,
+        onError: options?.onError,
+        onController: options?.onController,
+      }, 
+      requestTimeoutId)
+    if(finish){
+      controller.signal.onabort = finish;
+    }
+  
+  }
+
+  // 语言APP 接口
+  async languageChat(messages: RequestMessage[], options:BaseChatOptions): Promise<void> {
+    const requestPayload = {
+      messages,
+      // stream: false, //服务端指定
+      // model: "gpt-3.5-turbo", 
+      // temperature: 0.6,
+      // max_tokens: 4000,
+      // presence_penalty: modelConfig.presence_penalty,
+    };
+
+    const chatPath = `${process.env.NEXT_PUBLIC_API_BASE_URL}/llms/app_language_chat`;
+    const chatPayload = {
+      method: "POST",
+      body: JSON.stringify(requestPayload),
+      headers: {
+        "Content-Type": "application/json",
+        "x-requested-with": "XMLHttpRequest",
+        "withCredentials": 'false' ,
+      },
+    };
+    
+
+    await chatWithFetchEventSource(chatPath, chatPayload, {
+        onUpdate: options?.onUpdate,
+        onFinish: options?.onFinish,
+        onError: options?.onError,
+        onController: options?.onController,
+      })
+   
+
   }
 }
 const llm = new LLM()

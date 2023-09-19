@@ -121,7 +121,7 @@ export function Markdown(
   props: {
     content: string;
     loading?: boolean;
-    fontSize?: string;
+
     fontColor?: string;
     parentRef?: RefObject<HTMLDivElement>;
     defaultShow?: boolean;
@@ -161,7 +161,7 @@ export function Markdown(
     <div
       className="markdown-body"
       style={{
-        fontSize: props.fontSize ,
+       
         color: `${props.fontColor ?? '#24292f'}`,
         height:
           !inView.current && renderedHeight.current > 0
