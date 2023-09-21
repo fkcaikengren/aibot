@@ -39,7 +39,7 @@ export const MENUS:MenuInfo[] = [
   {
     id: '1',
     name: 'GPT3.5',
-    info:'',  
+    info: '免费',  
     img: <BotIcon className='w-9 h-9'/>,
     path: '/gpt',
     border: false,
@@ -56,7 +56,7 @@ export const MENUS:MenuInfo[] = [
 
   {
     id: '3',
-    name: '充值',
+    name: '订阅 GPT4',//'充值',
     info:'',  
     img: <CurrencyYenIcon className="w-9 h-9 p-[3px]"/>,
     path: '/pay',

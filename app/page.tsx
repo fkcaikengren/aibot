@@ -55,8 +55,16 @@ export default async function App() {
               balances.map((bl:any, idx:number)=>(
                 <Card key={idx} className="text-white bg-gradient-to-r from-[#a6c1ee] to-[#fbc2eb] flex flex-col">
                   <h4 className="text-2xl mb-2">{bl.llm.name}</h4>
-                  <p>剩余 <span className="text-xl font-bold">{displayTokensNum(bl.total - bl.used)}</span> tokens</p>
-                  <p>已使用{displayTokensNum(bl.used)} / 总计{displayTokensNum(bl.total)} tokens</p>
+                  {bl.llm.name !== 'gpt-3.5-turbo' &&
+                    <>
+                    <p>剩余 <span className="text-xl font-bold">{displayTokensNum(bl.total - bl.used)}</span> tokens</p>
+                    <p>已使用{displayTokensNum(bl.used)} / 总计{displayTokensNum(bl.total)} tokens</p>
+                    </>
+                  }
+                  {bl.llm.name === 'gpt-3.5-turbo' &&
+                    <p className="text-xl font-bold">免费</p>
+                  }
+                 
                 </Card> 
               ))
             }
