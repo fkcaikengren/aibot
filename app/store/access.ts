@@ -6,23 +6,7 @@ import { ALL_MODELS } from "./config";
 import { mountStoreDevtool } from 'simple-zustand-devtools';
 
 
-export interface AccessControlStore {
 
-  token: string, 
-  refreshToken: string,
-
-  id: string,
-  nickname: string,
-  avatar: string,
-  email: string,
-  phone: string,
-  role: string,
-  new: boolean,
-  
-  updateToken: (_: string) => void;
-  init :(_:object) => void;
-  reset:()=>void;
-}
 
 const DEFAULT_ACCESS_STORE = {
   token: "", 
@@ -36,6 +20,13 @@ const DEFAULT_ACCESS_STORE = {
   role: "",
   new: false
 }
+export type AccessControlStore = typeof DEFAULT_ACCESS_STORE & {
+  updateToken: (token: string) => void;
+  init :(_:object) => void;
+  reset:()=>void;
+}
+
+
 
 export const useAccessStore = create<AccessControlStore>()(
   persist(

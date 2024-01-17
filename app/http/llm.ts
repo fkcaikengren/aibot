@@ -25,7 +25,7 @@ export interface LLMConfig {
   frequency_penalty?: number;
 }
 
-export interface BaseChatOptions {
+export interface ChatHandleOptions {
   onUpdate?: (message: string, chunk: string) => void;
   onFinish: (message: string) => void;
   onError?: (err: Error) => void;
@@ -33,7 +33,7 @@ export interface BaseChatOptions {
 }
 
 
-export interface ChatOptions extends BaseChatOptions {
+export interface ChatOptions extends ChatHandleOptions {
   messages: RequestMessage[];
   config: LLMConfig;
 
@@ -92,7 +92,7 @@ const chatWithFetchEventSource = (
     signal?: AbortSignal;
     headers: any;
   },
-  options: BaseChatOptions,
+  options: ChatHandleOptions,
   requestTimeoutId: ReturnType<typeof setTimeout>|undefined = undefined,
 ): Promise<((this: AbortSignal, ev: Event) => any) | null> => {
   return new Promise((resolve, reject) => {
@@ -178,7 +178,6 @@ class LLM{
   async chat(options: ChatOptions) : Promise<void>{
 
     const {token} = useAccessStore.getState()
-    // const token = ''
   
     const messages = options.messages.map((v) => ({
       role: v.role,
@@ -254,7 +253,7 @@ class LLM{
   }
 
   // 语言APP 接口
-  async languageChat(messages: RequestMessage[], options:BaseChatOptions): Promise<void> {
+  async languageChat(messages: RequestMessage[], options:ChatHandleOptions): Promise<void> {
     const requestPayload = {
       messages,
       // stream: false, //服务端指定
