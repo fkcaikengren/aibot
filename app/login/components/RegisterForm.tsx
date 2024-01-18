@@ -69,11 +69,11 @@ function TermsModal(){
   const {closeModal} = useModal()
   return  <>
     <div className="px-6 py-5 border-dotted border-b-2">
-      <h3 className="text-violet-500 text-lg text-bold">踩坑人服务条款协议</h3>
+      <h3 className="text-violet-500 text-lg text-bold">”{process.env.NEXT_PUBLIC_WEBSITE_NAME}“服务条款协议</h3>
     </div>
     <div className="flex-1 overflow-y-auto px-6 py-3">
     <p>尊敬的用户： </p>
-    <p>欢迎使用踩坑人AI（以下简称“本网站”）！在使用本网站之前，请仔细阅读本隐私权政策（以下简称“本政策”）。</p>
+    <p>欢迎使用”{process.env.NEXT_PUBLIC_WEBSITE_NAME}“（以下简称“本网站”）！在使用本网站之前，请仔细阅读本隐私权政策（以下简称“本政策”）。</p>
     <p>本政策说明本网站如何收集、使用、披露、处理、保护用户信息和平台使用规范。请注意，一旦您访问或使用本网站，即表示您同意接受本政策的全部条款和条件。 </p>
     
     <h4 className="text-lg text-bold my-2">一、信息收集 </h4>
@@ -102,7 +102,7 @@ function TermsModal(){
     <p> 5.1 本网站适用于年满18岁或以上的成年人。我们不会有意向未满18岁的儿童收集他们的个人信息。如果我们得知您提供给我们的信息属于未成年人的个人信息，我们将立即采取合理措施删除该信息。 </p>
     
     <h4 className="text-lg text-bold my-2">六、用户发布内容规范</h4>
-    <p>6.1 用户不得利用“踩坑人 AI”账号或本网站功能服务制作、上传、复制、发布、传播如下法律、法规和政策禁止的内容： </p>
+    <p>6.1 用户不得利用“”{process.env.NEXT_PUBLIC_WEBSITE_NAME}“”账号或本网站功能服务制作、上传、复制、发布、传播如下法律、法规和政策禁止的内容： </p>
 
     <ul>
       <li>(1) 反对宪法所确定的基本原则的；</li>
@@ -116,7 +116,7 @@ function TermsModal(){
       <li>(9) 含有法律、行政法规禁止的其他内容的信息。</li>
     </ul>
     
-    <p>6.2 用户不得利用“踩坑人 AI”账号或本网站功能服务制作、上传、复制、发布、传播如下干扰“功能服务”正常运营，以及侵犯其他用户或第三方合法权益的内容：</p>
+    <p>6.2 用户不得利用“”{process.env.NEXT_PUBLIC_WEBSITE_NAME}“”账号或本网站功能服务制作、上传、复制、发布、传播如下干扰“功能服务”正常运营，以及侵犯其他用户或第三方合法权益的内容：</p>
     <ul>
       <li>(1) 含有任何性或性暗示的；</li>
       <li>(2) 含有辱骂、恐吓、威胁内容的；</li>
@@ -143,9 +143,9 @@ function TermsModal(){
     </ul>
 
     <h4 className="text-lg text-bold my-2">八、免责声明</h4>
-    <p>8.1 踩坑人 AI无法对用户发表的回答或评论的正确性进行完全性保证。用户在踩坑人 AI发表的内容仅表明其个人的立场和观点，并不代表踩坑人 AI的立场或观点。作为内容的发表者，需自行对所发表内容负责，因所发表内容引发的一切纠纷，由该内容的发表者承担全部法律及连带责任。踩坑人 AI不承担任何法律及连带责任。 </p>
-    <p>8.2 踩坑人 AI不保证网络服务一定能满足用户的要求，也不保证网络服务不会中断，对网络服务的及时性、安全性、准确性也都不作保证。 </p>
-    <p>8.3 对于因不可抗力或踩坑人 AI不能控制的原因造成的网络服务中断或其它缺陷，踩坑人 AI不承担任何责任，但将尽力减少因此而给用户造成的损失和影响。</p>
+    <p>8.1 ”{process.env.NEXT_PUBLIC_WEBSITE_NAME}“无法对用户发表的回答或评论的正确性进行完全性保证。用户在”{process.env.NEXT_PUBLIC_WEBSITE_NAME}“发表的内容仅表明其个人的立场和观点，并不代表”{process.env.NEXT_PUBLIC_WEBSITE_NAME}“的立场或观点。作为内容的发表者，需自行对所发表内容负责，因所发表内容引发的一切纠纷，由该内容的发表者承担全部法律及连带责任。”{process.env.NEXT_PUBLIC_WEBSITE_NAME}“不承担任何法律及连带责任。 </p>
+    <p>8.2 ”{process.env.NEXT_PUBLIC_WEBSITE_NAME}“不保证网络服务一定能满足用户的要求，也不保证网络服务不会中断，对网络服务的及时性、安全性、准确性也都不作保证。 </p>
+    <p>8.3 对于因不可抗力或”{process.env.NEXT_PUBLIC_WEBSITE_NAME}“不能控制的原因造成的网络服务中断或其它缺陷，”{process.env.NEXT_PUBLIC_WEBSITE_NAME}“不承担任何责任，但将尽力减少因此而给用户造成的损失和影响。</p>
     
     <h4 className="text-lg text-bold my-2">九、其他</h4>
     <p>9.1 本政策适用于本网站的所有用户。如果您是本网站的注册用户，您还应遵守与注册服务相关的协议。 </p>

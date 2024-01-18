@@ -13,8 +13,8 @@ import { Toaster } from "react-hot-toast";
 const buildConfig = getBuildConfig();
 
 export const metadata = {
-  title: "踩坑人AI",
-  description: "踩坑人, 踩坑人AI, AI中文智能对话, 与AI对话, ChatGPT",
+  title:  process.env.NEXT_PUBLIC_WEBSITE_NAME,
+  description: "爱永恒, AI永恒, AI中文智能对话, 与AI对话, ChatGPT",
   viewport: {
     width: "device-width",
     initialScale: 1,
@@ -25,7 +25,7 @@ export const metadata = {
     { media: "(prefers-color-scheme: dark)", color: "#151515" },
   ],
   appleWebApp: {
-    title: "踩坑人AI",
+    title: process.env.NEXT_PUBLIC_WEBSITE_NAME,
     statusBarStyle: "default",
   },
 };

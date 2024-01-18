@@ -1,5 +1,4 @@
 import Card from '../components/Card';
-import CheckIcon from '../icons/check.svg'
 import UserPrompt from './components/UserPrompt';
 
 

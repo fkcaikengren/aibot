@@ -2,7 +2,6 @@
 
 import {  MouseEvent,  useCallback,  useEffect,  useMemo,  useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import Logo from '../images/logo.png'
 
@@ -12,7 +11,7 @@ import BotIcon from "../icons/bot.svg";
 import BlackBotIcon from "../icons/black-bot.svg";
 import CurrencyYenIcon from '../icons/currency-yen.svg'
 import BeakerIcon from '../icons/beaker.svg'
-
+import ApplicationsIcon from '../icons/applications.svg'
 
 // 首页的点击路径
 
@@ -30,7 +29,7 @@ export interface MenuInfo{
 export const MENUS:MenuInfo[] = [
   {
     id:'0',
-    name: '踩坑人AI',
+    name: process.env.NEXT_PUBLIC_WEBSITE_NAME as string,
     info: '',
     img: null,
     path: '/',
@@ -68,6 +67,14 @@ export const MENUS:MenuInfo[] = [
     info:'',  
     img: <BeakerIcon className="w-9 h-9  p-1"/>,
     path: '/setting',
+    border: true,
+  },
+  {
+    id: '5',
+    name: 'AI应用',
+    info:'',  
+    img: <ApplicationsIcon className="w-9 h-9 pl-2 p-1"/>,
+    path: '/apps',
     border: true,
   }
 ]
@@ -121,7 +128,7 @@ const SideBar = ({close}:{close?:()=>void}) => {
             width={36}
             height={36}
           />
-          <h1 className='text-xl text-violet-500 ml-3'>踩坑人AI</h1>
+          <h1 className='text-xl text-violet-500 ml-3'>{process.env.NEXT_PUBLIC_WEBSITE_NAME}</h1>
         </a>
       </header>
       <ul className="">
