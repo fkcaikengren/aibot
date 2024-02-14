@@ -6,11 +6,14 @@ import { StoreKey } from "../constant";
 
 export const ALL_MODELS = [
   {
-    name: "gpt-4",
+    name: "gpt-4-0125-preview",
   },
   {
     name: "gpt-3.5-turbo",
   },
+  {
+    name: "moonshot-v1-8k",
+  }
 ] as const;
 
 

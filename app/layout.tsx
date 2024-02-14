@@ -14,7 +14,7 @@ const buildConfig = getBuildConfig();
 
 export const metadata = {
   title:  process.env.NEXT_PUBLIC_WEBSITE_NAME,
-  description: "爱永恒, AI永恒, AI中文智能对话, 与AI对话, ChatGPT",
+  description: "AI永恒, 爱永恒, AI中文智能对话, 与AI对话, ChatGPT",
   viewport: {
     width: "device-width",
     initialScale: 1,

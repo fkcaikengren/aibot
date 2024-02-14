@@ -473,7 +473,7 @@ export const useChatStore = create<ChatStore>()(
     }),
     {
       name: StoreKey.Chat,
-      version: 1,
+      version: 2,
     },
   ),
 );

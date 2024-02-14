@@ -25,6 +25,7 @@ import {
 
 import BotIcon from "../icons/bot.svg";
 import BlackBotIcon from "../icons/black-bot.svg";
+import KimiIcon from "../icons/kimi.svg";
 import MyAvatar from '../images/avatar.jpeg'
 
 
@@ -62,14 +63,15 @@ const DEFAULT_TEXTAREA_HEIGHT = "35px"
 
 export function Avatar(props: { model?: ModelType; avatar?: string }) {
   const className = 'h-8 min-h-8 w-8 min-w-8 flex justify-center items-center border rounded-xl'
+  const botIcons = {
+    'gpt-3.5-turbo':<BotIcon className={className} />,
+    'gpt-4-0125-preview':<BlackBotIcon className={className} />,
+    'moonshot-v1-8k':<KimiIcon className={className} />
+  }
   if (props.model) {
     return (
       <div >
-        {props.model?.startsWith("gpt-4") ? (
-          <BlackBotIcon className={className} />
-        ) : (
-          <BotIcon className={className} />
-        )}
+        {botIcons[props.model] ? botIcons[props.model] :  <BotIcon className={className} />}
       </div>
     );
   }

@@ -6,10 +6,11 @@ import { usePathname, useRouter } from 'next/navigation'
 import Logo from '../images/logo.png'
 
 import { classNames } from '../utils/classNames'
-import { useAppConfig } from '../store'
+import { ModelType, useAppConfig } from '../store'
 import BotIcon from "../icons/bot.svg";
 import BlackBotIcon from "../icons/black-bot.svg";
-import CurrencyYenIcon from '../icons/currency-yen.svg'
+import KimiIcon from "../icons/kimi.svg";
+import QuestionIcon from '../icons/question.svg'
 import BeakerIcon from '../icons/beaker.svg'
 import ApplicationsIcon from '../icons/applications.svg'
 
@@ -22,7 +23,7 @@ export interface MenuInfo{
   img: string | JSX.Element | undefined | null;
   path: string;
   border: boolean,
-
+  model?: ModelType
 }
 
 
@@ -42,27 +43,45 @@ export const MENUS:MenuInfo[] = [
     img: <BotIcon className='w-9 h-9'/>,
     path: '/gpt',
     border: false,
-
+    model: 'gpt-3.5-turbo'
   },
   {
     id: '2',
     name: 'GPT4',
-    info:'',  
+    info:'限制',  
     img: <BlackBotIcon className='w-9 h-9'/>, 
     path: '/gpt-4',
-    border: true,
+    border: false,
+    model: 'gpt-4-0125-preview'
   },
-
   {
     id: '3',
-    name: '订阅 GPT4',//'充值',
+    name: 'Kimi',
+    info: '免费',  
+    img: <KimiIcon className="w-9 h-9 p-[3px]"/>,
+    path: '/kimi',
+    border: true,
+    model: 'moonshot-v1-8k'
+  },
+
+  // {
+  //   id: '4',
+  //   name: '订阅 GPT4',//'充值',
+  //   info:'',  
+  //   img: <CurrencyYenIcon className="w-9 h-9 p-[3px]"/>,
+  //   path: '/pay',
+  //   border: true,
+  // },
+  {
+    id: '4',
+    name: '常见问题',
     info:'',  
-    img: <CurrencyYenIcon className="w-9 h-9 p-[3px]"/>,
-    path: '/pay',
+    img: <QuestionIcon className="w-9 h-9 p-1 "/>,
+    path: '/question',
     border: true,
   },
   {
-    id: '4',
+    id: '5',
     name: '提示词',
     info:'',  
     img: <BeakerIcon className="w-9 h-9  p-1"/>,
@@ -70,7 +89,7 @@ export const MENUS:MenuInfo[] = [
     border: true,
   },
   {
-    id: '5',
+    id: '6',
     name: 'AI应用',
     info:'',  
     img: <ApplicationsIcon className="w-9 h-9 pl-2 p-1"/>,
@@ -98,16 +117,9 @@ const SideBar = ({close}:{close?:()=>void}) => {
     e.preventDefault()
     const curMenu = MENUS.find((menu)=>menu.id === id)
     if(curMenu){
-      if(['1', '2'].includes(curMenu.id)){
+      if(curMenu.model){
         const modelConfig = { ...config.modelConfig };
-        switch(curMenu.id){
-          case '1':
-            modelConfig.model = 'gpt-3.5-turbo'
-            break;
-          case '2':
-            modelConfig.model = 'gpt-4'
-            break;
-        }
+        modelConfig.model = curMenu.model 
         // 修改当前模型
         config.update((config) => (config.modelConfig = modelConfig));
       }
@@ -158,7 +170,7 @@ const SideBar = ({close}:{close?:()=>void}) => {
         ))
         }
       </ul>
-
+      
   </>
 }
 
