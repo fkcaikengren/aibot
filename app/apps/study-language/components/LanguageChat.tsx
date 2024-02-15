@@ -110,7 +110,7 @@ export default function LanguageChat({
               <div className="flex-1 pl-3 flex items-center">
                 <textarea
                   ref={inputRef}
-                  className={"w-full overflow-x-hidden resize-none text-sm leading-normal max-h-[160px] bg-transparent py-1"}
+                  className={"w-full overflow-x-hidden resize-none leading-normal max-h-[160px] bg-transparent py-1"}
                   placeholder={`Ctrl + Enter 发送`}
                   onInput={(e) => setUserInput(e.currentTarget.value)}
                   value={userInput}

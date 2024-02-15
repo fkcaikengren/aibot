@@ -363,7 +363,6 @@ export function Chat() {
     if (n === 0) {
       setPromptHints([]);
     } else if (!config.disablePromptHint && n < SEARCH_TEXT_LIMIT) {
-      console.log('search ...')
       // check if need to trigger auto completion
       if (text.startsWith("/")) {
         let searchText = text.slice(1);
@@ -754,7 +753,7 @@ export function Chat() {
             <div className="flex-1 pl-3 flex items-center">
               <textarea
                 ref={inputRef}
-                className={"w-full overflow-x-hidden resize-none text-sm leading-normal max-h-[160px] bg-transparent py-1"}
+                className={"w-full overflow-x-hidden resize-none leading-normal max-h-[160px] bg-transparent py-1"}
                 placeholder={`${submitKey} 发送，/ 触发提示词`}
                 onInput={(e) => onInput(e.currentTarget.value)}
                 value={userInput}

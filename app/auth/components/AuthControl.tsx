@@ -38,7 +38,7 @@ export default function AuthControl() {
       if(res.code >= 200 && res.code<400){ //成功
         
         const {token} = useAccessStore.getState()
-        console.log('set token: ', token)
+        // console.log('set token: ', token)
         saveCookieToken(token)
         const path = searchParams.get('redirect')
         if(path)

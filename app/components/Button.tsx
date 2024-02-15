@@ -26,7 +26,7 @@ export function IconButton(props: {
       )}
 
       {props.text && (
-        <div className={props.textClassName||''}>{props.text}</div>
+        <div className={props.textClassName||'whitespace-nowrap'}>{props.text}</div>
       )}
     </button>
   );

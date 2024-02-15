@@ -64,7 +64,7 @@ export const httpRequest = async (url:string, options:HttpOptions)=>{
               const {accessToken} = res.data
               accessStore.updateToken(accessToken)
               saveCookieToken(accessToken)
-              console.log('refresh get accessToken:', accessToken);
+              // console.log('refresh get accessToken:', accessToken);
               fetchOptions.headers = {
                 ...DEFAULT_HEADERS,
                 "Authorization": `Bearer ${accessToken}`

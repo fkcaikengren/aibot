@@ -16,7 +16,6 @@ interface CardLinkProps {
 const CardLink = ({className, children, href, external}: CardLinkProps) => {
   const router = useRouter();
   return <Card className={className} onClick={(e) => {
-    console.log(href)
     if(external) {
       window.open(`http://${window.location.host}${href}`, '_blank')
     } else {
