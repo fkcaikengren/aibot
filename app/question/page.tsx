@@ -37,7 +37,7 @@ export default async function Question () {
               <p className="font-bold">方式二</p>
               <div className="pl-2">
                 <p>1）将下面图片(请下载图片)和文字分享到朋友圈，截图朋友圈发送给网站管理员。分享即可获得 10K个 GPT4 token， 每多一个赞可多获得5K个, 最多可获得 50K个 token。</p>
-                <p>2）添加网站管理员WX : <span className='text-green-400'>ai_caikengren</span>。将你分享朋友圈的截图和你的用户ID（在首页复制）发送到网站管理员WX。</p>
+                <p>2）添加网站管理员WX : <span className='text-green-400'>ai_caikengren</span>。将你分享朋友圈的截图和你的邮箱地址（在首页复制）发送到网站管理员WX。</p>
               </div>
 
               <div className="border mt-2">

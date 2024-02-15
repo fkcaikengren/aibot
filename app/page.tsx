@@ -25,7 +25,7 @@ export default async function App() {
   if(res.code !== 200){
     return null;
   }
-  const {id , avatar , nickname, email, balances, inviteCode} = res.data;
+  const { avatar , nickname, email, balances, inviteCode} = res.data;
 
 
 
@@ -47,13 +47,8 @@ export default async function App() {
                 {nickname}
               </div>
             </div>
-            <div className="flex items-center leading-tight sm:leading-normal">
-              <div className="bg-violet-300 rounded-md text-white px-[2px] sm:px-[4px] mr-2 flex-shrink-0">
-                邮箱
-              </div>
-              <p className=" text-gray-600">{email}</p>
-            </div>
-            <MyInviteCode id={id} inviteCode={inviteCode}/>
+            
+            <MyInviteCode email={email} inviteCode={inviteCode}/>
           </div>
         </Card>
         <Card className="bg-white mt-10 flex flex-col">
