@@ -10,12 +10,13 @@ export default async function LoginLayout({
 
   
   return (
-    <div className="bg-white p-4 md:px-8 md:py-6 w-full h-full relative max-w-[1440px] m-auto">
-      <div className=" w-full h-[calc(100%-56px)] overflow-y-auto">
-      {children}
+    <div className="bg-white p-4 md:px-8 md:py-6 w-full relative max-w-[1440px] flex flex-col">
+      <div className="h-full">
+        <div className=" w-full h-[calc(100%-56px)] overflow-y-auto">
+        {children}
+        </div>
+        <FunctionBar />
       </div>
-      
-      <FunctionBar />
   </div>
   );
 }

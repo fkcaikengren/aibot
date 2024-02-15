@@ -144,7 +144,7 @@ function ChatHistoryModal(props:{closeActionPopover:()=>void}) {
             </div>
           ))}
         </div>
-        <p className="text-sm mx-4 py-3 text-right">对话信息保存在本地，仅保留最近的30次对话</p>
+        <p className=" mx-4 py-3 text-right">对话信息保存在本地，仅保留最近的30次对话</p>
       </>
 }
 
@@ -242,10 +242,10 @@ export function PromptHints(props: {
           onClick={() => props.onPromptSelect(prompt)}
           onMouseEnter={() => setSelectIndex(i)}
         >
-          <div className='font-bold text-sm'>
+          <div className='font-bold '>
             {prompt.title}
           </div>
-          <div className='text-sm text-ellipsis whitespace-nowrap overflow-hidden'>
+          <div className=' text-ellipsis whitespace-nowrap overflow-hidden'>
             {prompt.content}
           </div>
         </div>
@@ -358,6 +358,7 @@ export function Chat() {
   // only search prompts when user input is short
   const SEARCH_TEXT_LIMIT = 30;
   const onInput = (text: string) => {
+    a = 1
     setUserInput(text);
     const n = text.trim().length;
     if (n === 0) {
@@ -634,7 +635,7 @@ export function Chat() {
                     </div>
                   )}
                   <div className={classNames(
-                    'relative text-sm lg:text-base leading-normal border-box max-w-full mt-3 rounded-xl p-3 bg-gray-100 break-words',
+                    'relative  leading-normal border-box max-w-full mt-3 rounded-xl p-3 bg-gray-100 break-words',
                     {'bg-violet-500': isUser}
                   )}>
                     {showActions && (

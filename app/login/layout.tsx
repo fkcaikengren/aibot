@@ -17,8 +17,8 @@ export default async function LoginLayout({
   }
 
   return (
-    <div className="w-full h-full flex justify-center items-center bg-gradient-to-tl from-violet-500 to-blue-400">
-      <div className="bg-white px-8 py-6 w-full h-full sm:h-auto sm:w-96 sm:rounded-lg flex flex-col justify-center text-sm sm:text-base relative">
+    <div className="w-full flex justify-center items-center bg-gradient-to-tl from-violet-500 to-blue-400">
+      <div className="bg-white px-8 py-6 w-full h-full sm:h-auto sm:w-96 sm:rounded-lg  flex flex-col justify-center relative">
         <header className="flex flex-col justify-center items-center mb-8 sm:mt-8">
           <Image
             className='rounded-2xl'

@@ -9,7 +9,7 @@ const FunctionBar = ()=>{
   const pathname = usePathname()
 
    {/* 底部tabs */}
-  return <div className='absolute bottom-0 left-0 w-full text-sm h-[54px]'>
+  return <div className='absolute bottom-0 left-0 w-full  h-[54px]'>
     <div
    className="h-full flex flex-row items-center justify-around border-t md:border-t-0 max-w-3xl m-auto"
    role="tablist">

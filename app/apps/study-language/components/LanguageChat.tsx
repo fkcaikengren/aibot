@@ -155,7 +155,7 @@ export default function LanguageChat({
                 {"处理中…"}
             </div>
           }
-          <div className='relative text-sm lg:text-base leading-normal border-box max-w-full mt-3 rounded-xl p-3 bg-gray-100 break-words'>
+          <div className='relative leading-normal border-box max-w-full mt-3 rounded-xl p-3 bg-gray-100 break-words'>
               <Markdown
                 content={result.content}
                 loading={isLoading}

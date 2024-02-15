@@ -102,7 +102,7 @@ export default function UserPrompt(props: { onClose?: () => void }) {
           <div className='flex justify-between border-b px-3 py-2' key={v.id ?? v.title}>
             <div className='flex-1 max-w-[calc(100%-5.5rem)]'>
               <div className='font-bold text-base'>{v.title}</div>
-              <div className='text-sm text-ellipsis whitespace-nowrap overflow-hidden'>
+              <div className='text-ellipsis whitespace-nowrap overflow-hidden'>
                 {v.content}
               </div>
             </div>

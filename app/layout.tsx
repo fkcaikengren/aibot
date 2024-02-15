@@ -4,9 +4,9 @@ import "./styles/markdown.scss";
 import "./styles/highlight.scss";
 import { getBuildConfig } from "./config/build";
 import Modal from './components/Modal';
-import { Suspense } from "react";
 import NavigationEvents from "./components/NavigationEvents";
 import { Toaster } from "react-hot-toast";
+import { divide } from "lodash";
 
 
 
@@ -46,11 +46,10 @@ export default function RootLayout({
       <body>
         <Modal>
           <div className="h-screen flex">
-          <Suspense fallback={null}>
+          
             <NavigationEvents >
             {children}
             </NavigationEvents>
-          </Suspense>
           </div>  
         </Modal>
         <Toaster />
