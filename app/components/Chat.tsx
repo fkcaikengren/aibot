@@ -358,7 +358,6 @@ export function Chat() {
   // only search prompts when user input is short
   const SEARCH_TEXT_LIMIT = 30;
   const onInput = (text: string) => {
-    a = 1
     setUserInput(text);
     const n = text.trim().length;
     if (n === 0) {
