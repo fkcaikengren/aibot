@@ -25,7 +25,7 @@ export const httpRequest = async (url:string, options:HttpOptions)=>{
     body: body? JSON.stringify(body) : undefined,
     ...otherOptions,
   }
-  url = `${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`
+  url = `${process.env.INTERNAL_API_BASE_URL}${url}`
 
   return fetch(url, fetchOptions)
       .then(response => { //处理401错误
