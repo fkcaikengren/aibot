@@ -17,7 +17,7 @@ RUN yarn build && yarn install --production --ignore-scripts --prefer-offline
 FROM node:18.20.6-alpine3.21 AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 # RUN addgroup -g 1001 -S nodejs
 # RUN adduser -S nextjs -u 1001
@@ -34,7 +34,7 @@ COPY --from=builder /app/.env.production ./.env.production
 
 EXPOSE 3000
 
-ENV PORT 3000
+ENV PORT=3000
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
