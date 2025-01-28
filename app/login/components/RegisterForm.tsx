@@ -43,7 +43,7 @@ const formItems: FormItems[] = [
     type: 'password',
     placeholder: '密码',
     reg: PASSWORD_REGEX,
-    errMsg: '长度需大于6位',
+    errMsg: '长度需至少6位',
   },
   {
     cname: "重复密码",
@@ -51,7 +51,7 @@ const formItems: FormItems[] = [
     type: 'password',
     placeholder: '重复密码',
     reg: PASSWORD_REGEX,
-    errMsg: '长度需大于6位',
+    errMsg: '长度需至少6位',
   },
   {
     cname: "邀请码",

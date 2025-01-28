@@ -35,7 +35,7 @@ const formItems: FormItems[] = [
     type: 'password',
     placeholder: '请输入密码',
     reg: PASSWORD_REGEX,
-    errMsg: '长度需大于6位',
+    errMsg: '长度需至少6位',
   }
 ]
 
